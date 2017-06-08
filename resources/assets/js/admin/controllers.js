@@ -8,7 +8,7 @@
     .controller('LoginController', ['$scope', 'Login', '$state', function($scope, Login, $state) {
         $scope.login = function() {
             Login.login($scope.loginForm).then(function(response) {
-                console.log(response)
+                $state.go('dashboard');
             }, function(error) {
                 angular.forEach(error.data, function(value, key) {
                     Materialize.toast(value, 2000);                    
