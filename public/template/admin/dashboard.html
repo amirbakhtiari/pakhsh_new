@@ -1,0 +1,173 @@
+<nav >
+    <div class="nav-wrapper">
+
+        <a href="#" style="padding-right: 20px"  data-activates="mobile-demo" class="button-collapse "><i class="material-icons hide-on-large-only ">menu</i></a>
+        <ul class="hide-on-med-and-down">
+            <li><a href="#">نرم افزار مدیریت پخش مواد غذایی تسا</a></li>
+
+        </ul>
+
+        <ul class="left hide-on-med-and-down">
+            <li><a ui-sref="profile({user: 'amir'})" class="waves-effect waves-light btn">پروفایل<i class="material-icons right">supervisor_account</i></a></li>                        
+            <li><a ng-click="logout()" class="waves-effect waves-light btn">خروج <i class="material-icons right">present_to_all</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a ui-serf='dashboard' class="waves-effect waves-light btn">داشبورد  <i class="material-icons right">assignment_ind</i></a></li>
+            <li><a ui-sref='categoreis' class="waves-effect waves-light btn">دسته بندی  <i class="material-icons right">view_module</i></a></li>
+            <li><a ui-sref='products' class="waves-effect waves-light btn"> لیست محصولات  <i class="material-icons right">view_list</i></a></li>
+            <li><a href="factors.html" class="waves-effect waves-light btn">فاکتورها <i class="material-icons right">assignment</i></a></li>
+            <li><a ui-sref='message' class="waves-effect waves-light btn">پیام ها <i class="material-icons right">textsms</i></a></li>
+            <li><a ui-sref='persons' class="waves-effect waves-light btn">طرف حساب ها<i class="material-icons right">textsms</i></a></li>            
+            <li><a class="waves-effect waves-light btn">خروج <i class="material-icons right">present_to_all</i></a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="row">
+    <div class="col m12 ">
+        <div class="col m9 s12">
+            <div class="col s12 m12 no-padding">
+                <div class="card-panel teal">
+                     <span class="white-text">
+<p>فاکتور های ثبت شده امروز : 0 فاکتور</p>
+<p>  اجناس فروخته شده : 0 قلم جنس</p>
+<p> میلغ فاکتورهای امروز : 0 توامن</p>
+                     </span>
+                </div>
+            </div>
+            <ui-view></ui-view>
+        </div>
+
+        <div class="col m3">
+            <div class="no-padding">
+                <div class="row" >
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a ui-sref='new-factors'>                                  
+                                <div class="card-content white-text">
+                                    <span style="font-size: 14px" class="card-title"> داشبورد مدیریت</span>
+                                    <span style="font-size: 30px" class="material-icons">settings</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a ui-sref="factors({confirmed: 'all', today: 'today'})">  
+                                <div class="card-content white-text">
+                                    <span style="font-size: 14px" class="card-title"> فاکتور های امروز </span>
+                                    <span style="font-size: 30px" class="material-icons">receipt</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a  href="#">   <div class="card-content white-text">
+                                <span style="font-size: 14px" class="card-title">آمار فروش </span>
+                                <span style="font-size: 30px" class="material-icons">trending_up</span>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a  ui-sref="categoreis">   <div class="card-content white-text">
+                                <span style="font-size: 14px" class="card-title">دسته بندی  </span>
+                                <span style="font-size: 30px" class="material-icons">view_module</span>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a ui-sref='products'><div class="card-content white-text">
+                                <span style="font-size: 14px" class="card-title"> محصولات  </span>
+                                <span style="font-size: 30px" class="material-icons">view_list</span>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a  ui-sref="factors({confirmed: 'all', today:'all'})"><div class="card-content white-text">
+                                <span style="font-size: 14px" class="card-title"> تمام فاکتورها  </span>
+                                <span style="font-size: 30px" class="material-icons">assignment</span>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a ui-sref='message'><div class="card-content white-text">
+                                <span style="font-size: 14px" class="card-title"> پیام ها  </span>
+                                <span style="font-size: 30px" class="material-icons">textsms</span>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col s6  center">
+                        <div class="card red darken-1">
+                            <a ui-sref='persons'><div class="card-content white-text">
+                                <span style="font-size: 14px" class="card-title"> طرف حساب ها </span>
+                                <span style="font-size: 30px" class="material-icons">assignment_ind</span>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="fixed-action-btn">
+    <a  ui-sref="factors({confirmed:'unconfirmed', today: 'today'})" class="btn btn-block btn-large teal">فاکتورهای تائید نشد : 0   <i class="material-icons right">warning</i></a>
+</div>
+
+<div id="modal-factor" class="modal">
+    <div class="modal-content">
+        <h4 class="modal-close material-icons left" >close</h4>
+        <h5 class="right" style="font-family: Roboto">فاکتور درخواستی مشتری </h5>
+        <table class="bordered">
+            <thead>
+            <tr>
+                <th> مجموع</th>
+                <th> تعداد </th>
+                <th> بهای واحد </th>
+                <th> نام محصول </th>
+                <th> ردیف </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>498000</td>
+                <td>60</td>
+                <td>8300</td>
+                <td>چیپش کتل</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>498000</td>
+                <td>60</td>
+                <td>8300</td>
+                <td>چیپش کتل</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>498000</td>
+                <td>60</td>
+                <td>8300</td>
+                <td>چیپش کتل</td>
+                <td>3</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="left">
+            <p>جمع کل : 125000</p>
+            <p>تخفیف فاکتور :5000</p>
+            <p> قابل پرداخت :120000</p>
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn ">تائید فاکتور </a>
+
+        </div>
+    </div>
+</div>

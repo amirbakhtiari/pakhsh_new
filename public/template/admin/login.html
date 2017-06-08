@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="row center">
+    <div class="col s12 m3 push-l4 center login-form">
+        <div class="card-panel blue-grey darken-1">
+<h5 class="white-text">پنل مدیریت فروشنده</h5>
+            <form no-validate ng-submit="login()">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="text" class="validate" placeholder="شماره همراه " ng-model="loginForm.username">
+                    </div>
+                    <div class="input-field col s12">
+                        <input type="tel" class="validate" placeholder="رمز عبور" ng-model="loginForm.password">
+                    </div>
+                    <!--<div class="input-field col s12">
+                        <input type="tel" class="validate" placeholder="عبارت امنیتی" ng-model="loginForm.captcha">
+                    </div>-->
+                </div>
+                <button type="submit" class="modal-action modal-close waves-effect waves-green btn btn-large">ورود به مدیریت </button>
+            </form>
+        </div>
+    </div>
+</div>
