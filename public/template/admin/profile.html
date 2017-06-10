@@ -1,31 +1,37 @@
-<div class="card-panel col m12 hide-on-med-and-down ng-scope">
-    <h5>پروفایل مدیریت</h5>
+<h5>پروفایل مدیریت</h5>
 
 <form class="col s12">
-      <div class="row">
+    <div class="row">
         <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">نام</label>
+            <input id="first_name" type="text" class="validate" ng-model="profile.first_name">
+            <label for="first_name">نام</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">نام خانوادگی</label>
+            <input id="last_name" type="text" class="validate" ng-model="profile.last_name">
+            <label for="last_name">نام خانوادگی</label>
         </div>
-      </div>
-      <div class="row">
+        <div class="input-field col s6">
+            <input id="mobile" type="text" class="validate" ng-model="profile.mobile">
+            <label for="mobile">شماره موبایل</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="username" type="text" class="validate" ng-model="profile.username">
+            <label for="username">شماره موبایل</label>
+        </div>
+    </div>
+    <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">رمز</label>
+            <input id="password" type="password" class="validate">
+            <label for="password">رمز</label>
         </div>
-      </div>
-      <div class="row">
+    </div>
+    <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">ایمیل</label>
+            <input id="email" type="email" class="validate" ng-model="profile.email">
+            <label for="email">ایمیل</label>
         </div>
-      </div>
-      <div class="row">
-          <button class="btn btn-small">ذخیره </button>
-      </div>      
-    </form>
-</div>
+    </div>
+    <div class="row">
+        <button class="btn btn-small">ذخیره </button>
+    </div>
+</form>

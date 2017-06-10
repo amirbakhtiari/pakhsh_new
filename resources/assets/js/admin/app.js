@@ -3,8 +3,8 @@
  */
 angular.module('admin.module', ['admin.controllers', 'admin.directives', 'admin.routes', 'admin.services', 'angular-loading-bar'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-            cfpLoadingBarProvider.includeSpinner = true;
+        cfpLoadingBarProvider.includeSpinner = true;
     }]);
 
 
-    // https://github.com/angular-ui/ui-router/wiki/Quick-Reference
+// https://github.com/angular-ui/ui-router/wiki/Quick-Reference

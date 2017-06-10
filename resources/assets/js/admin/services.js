@@ -2,22 +2,23 @@
  * Created by amirbakhtiari on 6/1/17.
  */
 angular.module('admin.services', [])
-    .factory('Login', function($http, $q, $httpParamSerializer) {
+    .factory('User', function($http, $q, $httpParamSerializer, $auth) {
         return {
             login: function(data) {
-                return $http(
-                    {
-                        url: '/login',
-                        method: 'POST',
-                        data: data,
-                        headers: {'Content-type': 'application/json'}
-                    });
+                return $auth.login(data);
             },
             register: function() {
 
             },
             captcha: function() {
 
+            },
+            profile: function(token) {
+                return $http({
+                    url: '/profile',
+                    method: 'GET',
+                    params: {token: token}
+                })
             }
         }
     });

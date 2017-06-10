@@ -12,8 +12,12 @@ define('UN_BOX', 7);
 
 define('IMAGE_PATH', 'uploads');
 
+define('ACTIVE', 1);
+
 Route::get('/', 'PageController@index');
-Route::post('/login', 'UserController@login');
-Route::post('/register', 'UserController@register');
+Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');
+Route::get('/profile', 'UserController@profile');
 
 Route::resource('/factor', 'FactorController');
+Route::resource('/person', 'PersonsController');

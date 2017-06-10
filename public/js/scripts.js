@@ -7,11 +7,11 @@ angular.module('PakhshApp', ['admin.module']);
  */
 angular.module('admin.module', ['admin.controllers', 'admin.directives', 'admin.routes', 'admin.services', 'angular-loading-bar'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-            cfpLoadingBarProvider.includeSpinner = true;
+        cfpLoadingBarProvider.includeSpinner = true;
     }]);
 
 
-    // https://github.com/angular-ui/ui-router/wiki/Quick-Reference
+// https://github.com/angular-ui/ui-router/wiki/Quick-Reference
 /**
  * Created by amirbakhtiari on 6/1/17.
  */
@@ -19,160 +19,225 @@ angular.module('admin.module', ['admin.controllers', 'admin.directives', 'admin.
 (function() {
     'use strict';
     angular.module('admin.controllers', [])
-    .controller('LoginController', ['$scope', 'Login', '$state', function($scope, Login, $state) {
-        $scope.login = function() {
-            Login.login($scope.loginForm).then(function(response) {
-                $state.go('dashboard');
-            }, function(error) {
-                angular.forEach(error.data, function(value, key) {
-                    Materialize.toast(value, 2000);                    
+        .controller('LoginController', ['$scope', 'User', '$state', function($scope, User, $state) {
+            $scope.login = function() {
+                User.login($scope.loginForm).then(function(response) {
+                    Materialize.toast("شما با موفقیت وارد شدید.", 2000);
+                    $state.go('dashboard');
+                }, function(error) {
+                    angular.forEach(error.data, function(value, key) {
+                        Materialize.toast(value, 2000);
+                    })
+                });
+            };
+        }])
+        .controller('DashboardController', ['$scope', '$state', '$auth', 'User', function($scope, $state, $auth, User) {
+            if($auth.isAuthenticated()) {
+                User.profile($auth.getToken()).then(function (response) {
+                    $scope.user = {current: response.data.first_name + ' ' + response.data.last_name};
                 })
+            }
+            if(!$auth.isAuthenticated())
+                return;
+            $scope.logout = function() {
+                $auth.logout().then(function() {
+                    $auth.removeToken();
+                    $state.go('login');
+                });
+            };
+        }])
+        .controller('FactorsController', ['$scope', '$stateParams', function($scope, $stateParams) {
+            if($stateParams.confirmed == 'all' && $stateParams.today == 'today') {
+                $scope.factors = {title: 'فاکتورهای تایید شده امروز'};
+            } else if($stateParams.confirmed == 'unconfirmed') {
+                $scope.factors = {title: 'فاکتورهای تایید نشده امروز'};
+            } else if($stateParams.confirmed == 'all' && $stateParams.today == 'all') {
+                $scope.factors = {title: 'تمام فاکتورها'};
+            } else {
+                $scope.factors = {title: 'تمام فاکتورها'};
+            }
+
+        }])
+        .controller('LogoutController', ['$scope', '$state', function($scope, $state) {
+
+        }])
+        .controller('CategoriesController', ['$scope', function($scope) {
+
+        }])
+        .controller('ProductsController', ['$scope', function($scope) {
+            $(".button-collapse").sideNav(
+                {
+                    menuWidth: 245, // Default is 300
+                    edge: 'right', // Choose the horizontal origin
+                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                    draggable: true // Choose whether you can drag to open on touch screens
+                }
+            );
+            $(".button-collapse-products").sideNav(
+                {
+                    menuWidth: 245, // Default is 300
+                    edge: 'left', // Choose the horizontal origin
+                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                    draggable: true // Choose whether you can drag to open on touch screens
+                }
+            );
+            $('.collapsible').collapsible();
+
+        }])
+        .controller('MessageController', ['$scope', function($scope) {
+            $scope.replyMessage = function(id) {
+                console.log($('#modal-reply').modal('open'));
+            }
+        }])
+        .controller('PersonsController', ['$scope', function($scope) {
+            angular.extend($scope, {
+                addPerson: function() {
+
+                },
+                save: function() {
+                }
             });
-        };
-
-    }])
-    .controller('DashboardController', ['$scope', '$state', function($scope, $state) {
-        $scope.logout = function() {
-            $state.go('login');
-        };
-    }])
-    .controller('FactorsController', ['$scope', '$stateParams', function($scope, $stateParams) {
-        if($stateParams.confirmed == 'all' && $stateParams.today == 'today') {
-            $scope.factors = {title: 'فاکتورهای تایید شده امروز'};
-        } else if($stateParams.confirmed == 'unconfirmed') {
-            $scope.factors = {title: 'فاکتورهای تایید نشده امروز'};
-        } else if($stateParams.confirmed == 'all' && $stateParams.today == 'all') {
-            $scope.factors = {title: 'تمام فاکتورها'};
-        } else {
-            $scope.factors = {title: 'تمام فاکتورها'};            
-        }
-
-    }])
-    .controller('LogoutController', ['$scope', '$state', function($scope, $state) {
-        
-    }])
-    .controller('CategoreisController', ['$scope', function($scope) {
-
-    }])
-    .controller('ProductsController', ['$scope', function($scope) {
-        $(".button-collapse").sideNav(
-            {
-                menuWidth: 245, // Default is 300
-                edge: 'right', // Choose the horizontal origin
-                closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                draggable: true // Choose whether you can drag to open on touch screens
-            }
-        );
-        $(".button-collapse-products").sideNav(
-            {
-                menuWidth: 245, // Default is 300
-                edge: 'left', // Choose the horizontal origin
-                closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                draggable: true // Choose whether you can drag to open on touch screens
-            }
-        );
-        $('.collapsible').collapsible();
-
-    }])
-    .controller('MessageController', ['$scope', function($scope) {
-        $scope.replyMessage = function(id) {
-            console.log($('#modal-reply').modal('open'));
-        }
-    }])
-    .controller('PersonsController', ['$scope', function($scope) {
-        angular.extend($scope, {
-            addPerson: function() {
-
-            },
-            save: function() {
-            }
-        });
-    }])
-    .controller('ProfileController', ['$scope', function($scope) {
-
-    }]);
+        }])
+        .controller('ProfileController', ['$scope', 'profile', '$rootScope', function($scope, profile, $rootScope) {
+            $scope.profile = profile.data;
+        }]);
 })();
 /**
  * Created by amirbakhtiari on 6/1/17.
  */
-angular.module('admin.directives', []);
+angular.module('admin.directives', [])
+    .directive('image-upload', function() {
+        
+    });
 /**
  * Created by amirbakhtiari on 6/1/17.
  */
-angular.module('admin.routes', ['ui.router'])
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+angular.module('admin.routes', ['ui.router', 'satellizer'])
+    .config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
         const ADMIN_TEMPLATE = '/template/admin/';
+        $authProvider.loginUrl = '/login';
+
+        var skipIfLoggedIn = function($q, $auth) {
+            var deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.reject();
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise;
+        };
+
+        var loginRequired = function($q, $location, $auth) {
+            var deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.resolve();
+            } else {
+                $location.path('login');
+            }
+            return deferred.promise;
+        };
+
         $urlRouterProvider.otherwise('login');
         $stateProvider.state('login', {
             url: '/login',
             templateUrl: ADMIN_TEMPLATE + 'login.html',
-            controller: 'LoginController'
+            controller: 'LoginController',
+            resolve: {
+                skipIfLoggedIn: skipIfLoggedIn
+            }
         }).state('dashboard', {
             url: '/dashboard',
             templateUrl: ADMIN_TEMPLATE + 'dashboard.html',
-            controller: 'DashboardController'
+            controller: 'DashboardController',
+            resolve: {
+                loginRequired: loginRequired,
+                profile: function() {
+                }
+            }
         }).state('factors', {
             parent: 'dashboard',
             url: '/factors/:confirmed/:today',
             templateUrl: ADMIN_TEMPLATE + 'factors.html',
-            controller: 'FactorsController'
+            controller: 'FactorsController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         }).state('new-factors', {
             parent: 'dashboard',
             url: '/new-factors',
             templateUrl: ADMIN_TEMPLATE + 'new-factors.html',
             resolve: {
-                
+                loginRequired: loginRequired
             }
         }).state('logout', {
             url: '/logout',
             controller: 'LogoutController'
-        }).state('categoreis', {
+        }).state('categories', {
             parent: 'dashboard',
-            url: '/categoreis',
+            url: '/categories',
             templateUrl: ADMIN_TEMPLATE + 'categories.html',
-            controller: 'CategoreisController'
+            controller: 'CategoriesController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         }).state('products', {
             parent: 'dashboard',
             url: '/products',
             templateUrl: ADMIN_TEMPLATE + 'products.html',
-            controller: 'ProductsController'
+            controller: 'ProductsController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         }).state('message', {
             parent: 'dashboard',
             url: '/message',
             templateUrl: ADMIN_TEMPLATE + 'message.html',
-            controller: 'MessageController'
+            controller: 'MessageController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         }).state('persons', {
             parent: 'dashboard',
             url: '/persons',
             templateUrl: ADMIN_TEMPLATE + 'persons.html',
-            controller: 'PersonsController'
+            controller: 'PersonsController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         }).state('profile', {
             parent: 'dashboard',
-            url: '/profile/:user',
+            url: '/profile',
             templateUrl: ADMIN_TEMPLATE + 'profile.html',
-            controller: 'ProfileController'
-        })
+            controller: 'ProfileController',
+            resolve: {
+                loginRequired: loginRequired,
+                profile: function(User, $auth) {
+                    return User.profile($auth.getToken());
+                }
+            }
+        });
     }]);
 /**
  * Created by amirbakhtiari on 6/1/17.
  */
 angular.module('admin.services', [])
-    .factory('Login', function($http, $q, $httpParamSerializer) {
+    .factory('User', function($http, $q, $httpParamSerializer, $auth) {
         return {
             login: function(data) {
-                return $http(
-                    {
-                        url: '/login',
-                        method: 'POST',
-                        data: data,
-                        headers: {'Content-type': 'application/json'}
-                    });
+                return $auth.login(data);
             },
             register: function() {
 
             },
             captcha: function() {
 
+            },
+            profile: function(token) {
+                return $http({
+                    url: '/profile',
+                    method: 'GET',
+                    params: {token: token}
+                })
             }
         }
     });

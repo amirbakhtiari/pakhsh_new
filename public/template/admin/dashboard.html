@@ -1,23 +1,21 @@
 <nav >
     <div class="nav-wrapper">
-
-        <a href="#" style="padding-right: 20px"  data-activates="mobile-demo" class="button-collapse "><i class="material-icons hide-on-large-only ">menu</i></a>
+        <a href="javascript:void(0)" style="padding-right: 20px"  data-activates="mobile-demo" class="button-collapse "><i class="material-icons hide-on-large-only ">menu</i></a>
         <ul class="hide-on-med-and-down">
-            <li><a href="#">نرم افزار مدیریت پخش مواد غذایی تسا</a></li>
-
+            <li><a href="javascript:void(0)">نرم افزار مدیریت پخش مواد غذایی تسا</a></li>
         </ul>
 
         <ul class="left hide-on-med-and-down">
-            <li><a ui-sref="profile({user: 'amir'})" class="waves-effect waves-light btn">پروفایل<i class="material-icons right">supervisor_account</i></a></li>                        
+            <li><a ui-sref="profile" class="waves-effect waves-light btn">پروفایل : {{user.current}}<i class="material-icons right">supervisor_account</i></a></li>
             <li><a ng-click="logout()" class="waves-effect waves-light btn">خروج <i class="material-icons right">present_to_all</i></a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
             <li><a ui-serf='dashboard' class="waves-effect waves-light btn">داشبورد  <i class="material-icons right">assignment_ind</i></a></li>
-            <li><a ui-sref='categoreis' class="waves-effect waves-light btn">دسته بندی  <i class="material-icons right">view_module</i></a></li>
+            <li><a ui-sref='categories' class="waves-effect waves-light btn">دسته بندی  <i class="material-icons right">view_module</i></a></li>
             <li><a ui-sref='products' class="waves-effect waves-light btn"> لیست محصولات  <i class="material-icons right">view_list</i></a></li>
-            <li><a href="factors.html" class="waves-effect waves-light btn">فاکتورها <i class="material-icons right">assignment</i></a></li>
+            <li><a ui-sref="factors({confirmed: 'all', today: 'all'})"class="waves-effect waves-light btn">فاکتورها <i class="material-icons right">assignment</i></a></li>
             <li><a ui-sref='message' class="waves-effect waves-light btn">پیام ها <i class="material-icons right">textsms</i></a></li>
-            <li><a ui-sref='persons' class="waves-effect waves-light btn">طرف حساب ها<i class="material-icons right">textsms</i></a></li>            
+            <li><a ui-sref='persons' class="waves-effect waves-light btn">طرف حساب ها<i class="material-icons right">textsms</i></a></li>
             <li><a class="waves-effect waves-light btn">خروج <i class="material-icons right">present_to_all</i></a></li>
         </ul>
     </div>
@@ -36,7 +34,9 @@
                      </span>
                 </div>
             </div>
-            <ui-view></ui-view>
+            <div class="card-panel col m12 hide-on-med-and-down">
+                <ui-view></ui-view>
+            </div>
         </div>
 
         <div class="col m3">
@@ -44,7 +44,7 @@
                 <div class="row" >
                     <div class="col s6  center">
                         <div class="card red darken-1">
-                            <a ui-sref='new-factors'>                                  
+                            <a ui-sref='new-factors'>
                                 <div class="card-content white-text">
                                     <span style="font-size: 14px" class="card-title"> داشبورد مدیریت</span>
                                     <span style="font-size: 30px" class="material-icons">settings</span>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col s6  center">
                         <div class="card red darken-1">
-                            <a ui-sref="factors({confirmed: 'all', today: 'today'})">  
+                            <a ui-sref="factors({confirmed: 'all', today: 'today'})">
                                 <div class="card-content white-text">
                                     <span style="font-size: 14px" class="card-title"> فاکتور های امروز </span>
                                     <span style="font-size: 30px" class="material-icons">receipt</span>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col s6  center">
                         <div class="card red darken-1">
-                            <a  ui-sref="categoreis">   <div class="card-content white-text">
+                            <a  ui-sref="categories">   <div class="card-content white-text">
                                 <span style="font-size: 14px" class="card-title">دسته بندی  </span>
                                 <span style="font-size: 30px" class="material-icons">view_module</span>
                             </div></a>
